@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_yasg',
     'django_seed',
+    'django_celery_results',
 
 
 ]
@@ -97,9 +98,9 @@ WSGI_APPLICATION = 'alx_travel_app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': env('DB_ENGINE'),
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
+        'NAME': env('MYSQL_DATABASE'),
+        'USER': env('MYSQL_USER'),
+        'PASSWORD': env('MYSQL_PASSWORD'),
         'HOST': env('DB_HOST'),
         'PORT': env('DB_PORT'),
 
@@ -149,13 +150,15 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Celery setup
-CELERY_BROKER_URL = 'amqp://localhost'  # To use rabbitmq
+CELERY_BROKER_URL = 'amqp://guest:guest@rabbitmq:5672'  # To use rabbitmq
+CELERY_RESULT_BACKEND = 'django-db'
+
 
 # Email configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env('EMAIL_PORT')
 EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-EMAIL_HOST_USER = 'gideonobiasor@gmail.com'
-EMAIL_HOST_PASSWORD = 'wovteenpcqgpfbhy'
+# EMAIL_USE_SSL = False
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')

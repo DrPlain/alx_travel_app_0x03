@@ -18,11 +18,11 @@ class UserListCreateAPIView(ListCreateAPIView):
 class ListingViewset(ModelViewSet):
     queryset = Property.objects.all()
     serializer_class = PropertySerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    # permission_classes = [IsAuthenticatedOrReadOnly]
 
-    def perform_create(self, serializer):
-        # Pass the user to the serializer
-        serializer.save(host=self.request.user)
+    # def perform_create(self, serializer):
+    #     # Pass the user to the serializer
+    #     serializer.save(host=self.request.user)
 
 
 class BookingViewset(ModelViewSet):

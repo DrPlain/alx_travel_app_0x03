@@ -22,7 +22,7 @@ class PropertySerializer(serializers.ModelSerializer):
         model = Property
         fields = [
             'property_id',
-            'host_id',
+            'host',
             'name',
             'description',
             'location',
@@ -30,13 +30,12 @@ class PropertySerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at'
         ]
-        read_only_fields = ['property_id',
-                            'host_id' 'created_at', 'updated_at']
+        read_only_fields = ['property_id', 'created_at', 'updated_at']
 
-    def create(self, validated_data):
-        # Automatically set the host as the currently authenticated user
-        validated_data['host_id'] = self.context['request'].user
-        return super().create(validated_data)
+    # def create(self, validated_data):
+    #     # Automatically set the host as the currently authenticated user
+    #     validated_data['host_id'] = self.context['request'].user
+    #     return super().create(validated_data)
 
 
 class ReviewSerializer(serializers.ModelSerializer):
